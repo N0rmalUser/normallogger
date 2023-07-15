@@ -1,6 +1,6 @@
 # normallogger (logium) - A simple logging library
 ***
-[![PyPI version](https://badge.fury.io/py/normallogger.svg)](https://badge.fury.io/py/logium)
+[![PyPI version 0.5](https://badge.fury.io/py/normallogger.svg)](https://pypi.org/project/logium/)
 ***
 A simple logging library for recording and displaying log messages.
 
