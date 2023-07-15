@@ -2,7 +2,7 @@
 A simple logging library for recording and displaying log messages.
 
 Author: N0rmalUser
-Version: 0.2
+Version: 0.4
 
 This library provides a Logger class that allows you to log messages with various severity levels. The log messages can be output to the console and/or saved to a log file with timestamps.
 
@@ -61,9 +61,32 @@ my_logger.w('This is a warning message')
 my_logger.c('This is a critical message')
 ```
 """
-
-
 from datetime import datetime
+
+
+def _printer(self):
+    """
+    The inner function for printing the message to the console and/or file
+    """
+    console_output = f'{self.time} {self.message}' if self.console_enabled and self.date_in_console else self.message
+    if self.console_enabled:
+        print(console_output)
+    if self.file_enable:
+        file_output = f'{self.time} {self.message}' if self.file_enable and self.date_in_file else self.message
+        with open(self.file, "a", encoding='utf-8') as f:
+            f.write(f'{file_output}\n')
+
+
+def _tagger(func):
+    """
+    The inner decorator function tagger takes a function and adds a tag to the message.
+    """
+    def wrapper(self, *args):
+        message = ' '.join(str(arg) + (':' if i != len(args) - 1 else '') for i, arg in enumerate(args))
+        self.message = message
+        return func(self)
+
+    return wrapper
 
 
 class logger:
@@ -98,7 +121,7 @@ class logger:
         self.date_in_file = date_in_file
         self.message = ''
 
-    @_decorator.tagger  # debug
+    @_tagger  # debug
     def d(self) -> None:
         """
         Decorator method for debug messages
@@ -106,7 +129,7 @@ class logger:
         self.message = '-DEBUG-' + self.message
         _printer(self)
 
-    @_decorator.tagger  # error
+    @_tagger  # error
     def e(self) -> None:
         """
         Decorator method for error messages
@@ -114,7 +137,7 @@ class logger:
         self.message = '-ERROR- ' + self.message
         _printer(self)
 
-    @_decorator.tagger  # info
+    @_tagger  # info
     def i(self) -> None:
         """
         Decorator method for informational messages
@@ -122,7 +145,7 @@ class logger:
         self.message = '-INFO- ' + self.message
         _printer(self)
 
-    @_decorator.tagger  # settings
+    @_tagger  # settings
     def s(self) -> None:
         """
         Decorator method for settings messages
@@ -130,7 +153,7 @@ class logger:
         self.message = '-SETTINGS-' + self.message
         _printer(self)
 
-    @_decorator.tagger  # warning
+    @_tagger  # warning
     def w(self) -> None:
         """
         Decorator method for warning messages
@@ -138,36 +161,10 @@ class logger:
         self.message = '-WARNING- ' + self.message
         _printer(self)
 
-    @_decorator.tagger  # critical
+    @_tagger  # critical
     def c(self) -> None:
         """
         Decorator method for critical messages
         """
         self.message = '-CRITICAL- ' + self.message
         _printer(self)
-
-
-def _printer(self):
-    """
-    The inner function for printing the message to the console and/or file
-    """
-    console_output = f'{self.time} {self.message}' if self.console_enabled and self.date_in_console else self.message
-    if self.console_enabled:
-        print(console_output)
-    if self.file_enable:
-        file_output = f'{self.time} {self.message}' if self.file_enable and self.date_in_file else self.message
-        with open(self.file, "a", encoding='utf-8') as f:
-            f.write(f'{file_output}\n')
-
-
-def _tagger(func):
-    """
-    The inner decorator function tagger takes a function and adds a tag to the message.
-    """
-
-    def wrapper(self, *args):
-        message = ' '.join(str(arg) + (':' if i != len(args) - 1 else '') for i, arg in enumerate(args))
-        self.message = message
-        return func(self)
-
-    return wrapper
