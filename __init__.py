@@ -2,7 +2,7 @@
 A simple logging library for recording and displaying log messages.
 
 Author: N0rmalUser
-Version: 0.4
+Version: 0.5
 
 This library provides a Logger class that allows you to log messages with various severity levels. The log messages can be output to the console and/or saved to a log file with timestamps.
 
@@ -68,12 +68,11 @@ def _printer(self):
     """
     The inner function for printing the message to the console and/or file
     """
-    console_output = f'{self.time} {self.message}' if self.console_enabled and self.date_in_console else self.message
     if self.console_enabled:
-        print(console_output)
+        print(f'{self.time} {self.message}' if self.console_enabled and self.date_in_console else self.message)
     if self.file_enable:
         file_output = f'{self.time} {self.message}' if self.file_enable and self.date_in_file else self.message
-        with open(self.file, "a", encoding='utf-8') as f:
+        with open(self.file[0], "a", encoding='utf-8') as f:
             f.write(f'{file_output}\n')
 
 
@@ -126,7 +125,7 @@ class logger:
         """
         Decorator method for debug messages
         """
-        self.message = '-DEBUG-' + self.message
+        self.message = '-DEBUG- ' + self.message
         _printer(self)
 
     @_tagger  # error
