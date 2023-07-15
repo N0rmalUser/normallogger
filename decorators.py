@@ -1,10 +1,10 @@
 class _decorator(object):
     """
-    TODO: добавить описание класса _decorator
+    The inner class _decorator represents a decorator that adds a tag to the message.
     """
     def tagger(func):
         """
-        TODO: добаввить описание tagger
+        The inner decorator function tagger takes a function and adds a tag to the message.
         """
         def wrapper(self, *args):
             message = ' '.join(str(arg) + (':' if i != len(args) - 1 else '') for i, arg in enumerate(args))
