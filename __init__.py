@@ -47,10 +47,10 @@ Methods:
 
 Example Usage:
 ```python
-from logium import Logger
-в
+from logium import logger
+
 # Create an instance of the Logger
-my_logger = Logger('log.txt')
+my_logger = logger('log.txt')
 
 # Log messages
 my_logger.d('This is a debug message')
