@@ -2,7 +2,7 @@
 A simple logging library for recording and displaying log messages.
 
 Author: N0rmalUser
-Version: 0.5
+Version: 1.0
 
 This library provides a Logger class that allows you to log messages with various severity levels. The log messages can be output to the console and/or saved to a log file with timestamps.
 
