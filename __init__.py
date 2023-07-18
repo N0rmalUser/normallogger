@@ -62,6 +62,9 @@ my_logger.c('This is a critical message')
 ```
 """
 from datetime import datetime
+import webbrowser
+
+__github__ = webbrowser.get('https://github.com/N0rmalUser/proxy-management')
 
 
 def _printer(self):
