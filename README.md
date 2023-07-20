@@ -1,5 +1,7 @@
 # normallogger (logium) - A simple logging library
+***
 [![PyPI version 0.5](https://badge.fury.io/py/normallogger.svg)](https://pypi.org/project/logium/)
+***
 A simple logging library for recording and displaying log messages.
 
 This library provides a Logger class that allows you to log messages with various severity levels. The log messages can be output to the console and/or saved to a log file with timestamps.
