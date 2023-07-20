@@ -1,6 +1,6 @@
 # normallogger (logium) - A simple logging library
 ***
-[![PyPI version 0.5](https://badge.fury.io/py/normallogger.svg)](https://pypi.org/project/logium/)
+[![PyPI](https://badge.fury.io/py/normallogger.svg)](https://pypi.org/project/logium/)
 ***
 A simple logging library for recording and displaying log messages.
 
@@ -62,8 +62,7 @@ log.c('This is a critical message')       # dd.mm.yyyy hh:mm:ss [CRITICAL] This 
 
 from logium import logger
 
-path_file = 'log.log'
-log = logger(path_file, console_enabled=False, date_in_console=False, date_in_file=False, wrap = '-level-')
+log = logger('log.log', console_enabled=False, date_in_console=False, date_in_file=False, wrap = '-level-')
 
 log.d('tag', 'This is a debug message')    # -DEBUG- tag: This is a debug message (in file only)
 ...
@@ -73,9 +72,8 @@ There can be as many tags as you want
 ```python
 from logium import logger
 
-path_file = 'log.log'
-log = logger(path_file, datetime_format='%d %b %H:%M:%S', file_enable=False)
+log = logger(datetime_format='%d %b %H:%M:%S', file_enable=False)
 
-log.d('tag','This is a debug message')    # 16 Jul 02:31:35 [DEBUG] tag: This is a debug message (in console only)
-log.e('tag','tag2','This is an error message')   # 16 Jul 02:31:35 [ERROR] tag: tag2: This is an error message (in console only)e
+log.d('tag','This is a debug message')           # 16 Jul 02:31:35 [DEBUG] tag: This is a debug message (in console only)
+log.e('tag','tag2','This is an error message')   # 16 Jul 02:31:35 [ERROR] tag: tag2: This is an error message (in console only)
 ```
