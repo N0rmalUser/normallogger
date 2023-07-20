@@ -40,18 +40,10 @@ class logger:
     Class for logging and recording logs
     """
 
-    def __init__(self, *logfile: str, console_enabled=True, datetime_format='%d.%m.%Y %H:%M:%S',
-                 date_in_console=True, file_enable=True, date_in_file=True, wrap='[message]'):
+    def __init__(self, logfile, console_enabled=True, datetime_format='%d.%m.%Y %H:%M:%S',
+                 date_in_console=True, file_enable=True, date_in_file=True, wrap='[level]'):
         """
         Initializes an instance of the logger class.
-
-        Args:
-            logfile (str): The name of the log file.
-            console_enabled (bool): Whether logging is enabled in the console (default: True).
-            datetime_format (str): The format of the date and time for the logs (default: '%d.%m.%Y %H:%M:%S').
-            date_in_console (bool): Whether to include date and time in the console output (default: True).
-            file_enable (bool): Whether to enable log file writing (default: True).
-            date_in_file (bool): Whether to include date and time in the file output (default: True).
         """
         if not all(isinstance(var, bool) for var in (console_enabled, date_in_console, file_enable, date_in_file)):
             raise ValueError("console_enabled, date_in_console, date_in_file, and file_enabled must be of bool type")
@@ -71,47 +63,47 @@ class logger:
     @_tagger  # debug
     def d(self) -> None:
         """
-        Decorator method for debug messages
+        Method for debug messages
         """
-        self.message = self.wrap.replace("message", 'DEBUG') + ' ' + self.message
+        self.message = self.wrap.replace("level", 'DEBUG') + ' ' + self.message
         _printer(self)
 
     @_tagger  # error
     def e(self) -> None:
         """
-        Decorator method for error messages
+        Method for error messages
         """
-        self.message = self.wrap.replace("message", 'ERROR') + ' ' + self.message
+        self.message = self.wrap.replace("level", 'ERROR') + ' ' + self.message
         _printer(self)
 
     @_tagger  # info
     def i(self) -> None:
         """
-        Decorator method for informational messages
+        Method for informational messages
         """
-        self.message = self.wrap.replace("message", 'INFO') + ' ' + self.message
+        self.message = self.wrap.replace("level", 'INFO') + ' ' + self.message
         _printer(self)
 
     @_tagger  # settings
     def s(self) -> None:
         """
-        Decorator method for settings messages
+        Method for settings messages
         """
-        self.message = self.wrap.replace("message", 'SETTINGS') + ' ' + self.message
+        self.message = self.wrap.replace("level", 'SETTINGS') + ' ' + self.message
         _printer(self)
 
     @_tagger  # warning
     def w(self) -> None:
         """
-        Decorator method for warning messages
+        Method for warning messages
         """
-        self.message = self.wrap.replace("message", 'WARNING') + ' ' + self.message
+        self.message = self.wrap.replace("level", 'WARNING') + ' ' + self.message
         _printer(self)
 
     @_tagger  # critical
     def c(self) -> None:
         """
-        Decorator method for critical messages
+        Method for critical messages
         """
-        self.message = self.wrap.replace("message", 'CRITICAL') + ' ' + self.message
+        self.message = self.wrap.replace("level", 'CRITICAL') + ' ' + self.message
         _printer(self)
